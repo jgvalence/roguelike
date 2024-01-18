@@ -1,0 +1,7 @@
+.deck {
+  display: flex;
+  justify-content: center; // Centrer les cartes horizontalement
+  flex-wrap: wrap; // Permettre aux cartes de se mettre en ligne suivante si nécessaire
+  // Autres styles selon vos besoins
+  gap: 10px;
+}

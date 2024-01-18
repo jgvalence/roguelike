@@ -1,0 +1,30 @@
+.fight-room {
+  display: flex;
+  flex-direction: column; // Changez pour une disposition en colonne
+  justify-content: space-between; // Cela alignera le haut et le bas
+  height: 90vh; // Utilisez la hauteur totale de la fenêtre de visualisation
+
+  .top-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 177px;
+  }
+
+  .deck-section {
+    // Styles supplémentaires pour le deck si nécessaire
+  }
+  button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    // Ajoutez plus de styles selon vos besoins
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+}

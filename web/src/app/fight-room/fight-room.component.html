@@ -1,0 +1,12 @@
+<div class="fight-room">
+  <div class="top-section">
+    <app-character></app-character>
+    <div *ngFor="let enemy of gameService.enemies; let i = index">
+      <app-enemy [enemy]="enemy" [enemyIndex]="i" (click)="selectEnemy(i)"></app-enemy>
+    </div>
+  </div>
+  <div class="deck-section">
+    <app-deck></app-deck>
+  </div>
+  <button (click)="endTurn()">End Turn</button>
+</div>

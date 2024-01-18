@@ -1,0 +1,10 @@
+<mat-card class="enemy-card">
+    <mat-card-header>
+      <mat-card-title>{{ enemy.name }}</mat-card-title>
+      <mat-card-subtitle>Enemy</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Health: {{ enemyHealth$ | async }}</p>
+      <p>Attack: {{ enemy.attack }}</p>
+    </mat-card-content>
+  </mat-card>

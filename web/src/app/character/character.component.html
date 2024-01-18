@@ -1,0 +1,10 @@
+<mat-card class="character-card">
+  <mat-card-header>
+    <mat-card-title>{{ gameService.character.name }}</mat-card-title>
+    <mat-card-subtitle>Character</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Health: {{ playerHealth$ | async }}</p>
+    <p>Energy: {{ playerEnergy$ | async }}</p>
+  </mat-card-content>
+</mat-card>
