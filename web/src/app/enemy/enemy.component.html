@@ -1,3 +1,7 @@
+<div><p *ngIf="isTarget">Damage: {{ gameService.targetDamage }}</p>
+  <p *ngIf="isAttacking">{{ gameService.attackingEnemyName }} attacks!</p>
+
+</div>
 <mat-card class="enemy-card">
     <mat-card-header>
       <mat-card-title>{{ enemy.name }}</mat-card-title>

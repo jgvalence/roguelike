@@ -7,6 +7,8 @@ import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { playCard } from '../store/actions/game.actions';
 import * as GameActions from '../store/actions/game.actions';
+import { of } from 'rxjs';
+import { delay, concatMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-fight-room',
@@ -23,19 +25,41 @@ export class FightRoomComponent implements OnInit {
   }
   selectEnemy(enemyIndex: number): void {
     const selectedCard = this.gameService.getSelectedCard();
-    if (selectedCard && selectedCard.type === 'attack') {  
+    if (selectedCard && selectedCard.type === 'attack') {
+      this.gameService.setAttack(selectedCard.name, selectedCard.value, enemyIndex);
       this.store.dispatch(playCard({ card: selectedCard, enemyIndex }));
-      this.gameService.clearCardSelection(); 
+      this.gameService.clearCardSelection();
+  
+      setTimeout(() => {
+        this.gameService.clearAttack();
+      }, 2000); // Réinitialise après 2 secondes
     }
   }
+  
   endTurn(): void {
     // Restaurer l'énergie du joueur à son maximum
     this.store.dispatch(GameActions.restorePlayerEnergy());
   
-    // Faire attaquer chaque ennemi
-    this.gameService.enemies.forEach(enemy => {
+    // Créer un flux observable pour chaque ennemi avec un délai
+    of(...this.gameService.enemies).pipe(
+      concatMap(enemy => 
+        of(enemy).pipe(
+          tap(() => {
+            // Mettre à jour les informations d'attaque avant de dispatcher l'attaque
+            this.gameService.setEnemyAttack(enemy.name, enemy.attack);
+          }),
+          delay(2000) // Introduit un délai de 2 secondes entre chaque ennemi
+        )
+      )
+    ).subscribe(enemy => {
+      // Dispatcher l'attaque de l'ennemi après le délai
       this.store.dispatch(GameActions.applyEnemyAttack({ attackValue: enemy.attack }));
+  
+      // Réinitialiser les informations d'attaque
+      setTimeout(() => {
+        this.gameService.clearEnemyAttack();
+      }, 2000);
     });
-
   }
+  
 }

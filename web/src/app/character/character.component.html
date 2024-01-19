@@ -1,3 +1,11 @@
+<div>
+  <p *ngIf="gameService.attackerAttackName">
+    {{ gameService.attackerAttackName }}
+  </p>
+  <p *ngIf="gameService.playerDamageTaken">
+    Damage: {{ gameService.playerDamageTaken }}
+  </p>
+</div>
 <mat-card class="character-card">
   <mat-card-header>
     <mat-card-title>{{ gameService.character.name }}</mat-card-title>
